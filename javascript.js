@@ -33,8 +33,8 @@ function operate(operator, num1, num2) {
 
 let number1 = "";
 let number2 = "";
-let operator = "";
-let operation = "";
+let operator = ""; // variable used for displaying the operator in the display
+let operation = ""; // variable used for running the operate function
 
 function assignVar(display) {
   if (!operation.length > 0) {
@@ -52,25 +52,26 @@ function assignVar(display) {
 function displayInput(display) {
   if (numberDisplay.innerText === "0") {
     numberDisplay.innerText = assignVar(display);
-  } else if (display === "clear") {
+  } else if (display === "clear") { // resets all variables
     number1 = "";
     number2 = "";
     operation = "";
     numberDisplay.innerText = "0";
   } else if (display === "equals" && typeof number2 === "number") {
     numberDisplay.innerText = operate(operation, number1, number2);
-    number1 = numberDisplay.innerText;
+    number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
     number2 = "";
     operation = "";
   } else if (operator.length > 0) {
     numberDisplay.innerHTML = operator;
     operator = "";
-  } else if (display === "equals" && operation === "") { // if the user clicks enter without an operation or second number
+  } else if (display === "equals" && operation === "") {
+    // if the user clicks enter without an operation or second number
     console.log("Something went wrong :(");
     numberDisplay.innerText = "0";
     number1 = "";
   } else {
-    numberDisplay.innerText = assignVar(display);
+    numberDisplay.innerText = assignVar(display); // displays number on calculator
   }
 }
 
@@ -78,7 +79,7 @@ let numberDisplay = document.getElementById("number-display");
 const buttons = document.getElementsByClassName("buttons");
 
 function getNumber() {
-  for (let i = 0; i < buttons.length; i++) {
+  for (let i = 0; i < buttons.length; i++) { // loop through all the buttons
     buttons[i].addEventListener("click", function () {
       switch (this.id) {
         case "seven":
