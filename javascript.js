@@ -66,8 +66,13 @@ function displayInput(display) {
     operation = "";
     numberDisplay.innerText = "0";
   } else if (display === "equals" && typeof number2 === "number") {
-    numberDisplay.innerText = operate(operation, number1, number2).toFixed(3);
-    number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
+    numberDisplay.innerText = operate(operation, number1, number2);
+    if (typeof numberDisplay.innerText === "number") {
+      numberDisplay.innerText.toFixed(3);
+      number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
+    } else {
+      number1 = ""
+    }
     number2 = "";
     operation = "";
     operator == "";
