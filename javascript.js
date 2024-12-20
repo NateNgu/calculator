@@ -34,23 +34,36 @@ function operate(operator, num1, num2) {
 let number1 = "";
 let number2 = "";
 let operator = "";
+let operation = "";
 
 function assignVar(display) {
-  if (operator.length > 0) {
+  if (!operation.length > 0) {
     // If theres an operator, assign to num2, otherwise assign to num1
-    number2 = display;
-    return number2;
-  } else {
-    number1 = display;
+    number1 += display;
+    console.log("this is number one");
+    number1 = parseInt(number1);
     return number1;
+  } else {
+    number2 += display;
+    console.log("this is number two");
+    number2 = parseInt(number2);
+    return number2;
   }
 }
 
 function displayInput(display) {
   if (numberDisplay.innerText === "0") {
-    numberDisplay.innerText = display;
+    numberDisplay.innerText = assignVar(display);
   } else if (display === "clear") {
+    number1 = "";
+    number2 = "";
+    operation = "";
     numberDisplay.innerText = "0";
+  } else if (display === "equals") {
+    numberDisplay.innerText = operate(operation, number1, number2);
+  } else if (operator.length > 0) {
+    numberDisplay.innerHTML += operator;
+    operator = "";
   } else {
     numberDisplay.innerText += assignVar(display);
   }
@@ -108,19 +121,28 @@ function getNumber() {
           displayInput(display);
           break;
         case "add":
-          operator = "add";
+          operator = "&plus;";
+          operation = "add";
+          displayInput(operator);
           break;
         case "subtract":
-          operator = "subtract";
+          operator = "&minus;";
+          operation = "subtract";
+          displayInput(operator);
           break;
         case "multiply":
-          operator = "multiply";
+          operator = "&times;";
+          operation = "multiply";
+          displayInput(operator);
           break;
         case "divide":
-          operator = "divide";
+          operator = "&divide;";
+          operation = "divide";
+          displayInput(operator);
           break;
         case "equals":
           display = "equals";
+          displayInput(display);
           break;
       }
     });
