@@ -40,12 +40,10 @@ function assignVar(display) {
   if (!operation.length > 0) {
     // If theres an operator, assign to num2, otherwise assign to num1
     number1 += display;
-    console.log("this is number one");
     number1 = parseInt(number1);
     return number1;
   } else {
     number2 += display;
-    console.log("this is number two");
     number2 = parseInt(number2);
     return number2;
   }
@@ -59,13 +57,20 @@ function displayInput(display) {
     number2 = "";
     operation = "";
     numberDisplay.innerText = "0";
-  } else if (display === "equals") {
+  } else if (display === "equals" && typeof number2 === "number") {
     numberDisplay.innerText = operate(operation, number1, number2);
+    number1 = numberDisplay.innerText;
+    number2 = "";
+    operation = "";
   } else if (operator.length > 0) {
-    numberDisplay.innerHTML += operator;
+    numberDisplay.innerHTML = operator;
     operator = "";
+  } else if (display === "equals" && operation === "") { // if the user clicks enter without an operation or second number
+    console.log("Something went wrong :(");
+    numberDisplay.innerText = "0";
+    number1 = "";
   } else {
-    numberDisplay.innerText += assignVar(display);
+    numberDisplay.innerText = assignVar(display);
   }
 }
 
