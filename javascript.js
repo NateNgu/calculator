@@ -18,10 +18,6 @@ function divide(num1, num2) {
   return total;
 }
 
-let number1;
-let operator;
-let number2;
-
 function operate(operator, num1, num2) {
   switch (operator) {
     case "add":
@@ -35,89 +31,98 @@ function operate(operator, num1, num2) {
   }
 }
 
+let number1 = "";
+let number2 = "";
+let operator = "";
+
+function assignVar(display) {
+  if (operator.length > 0) {
+    // If theres an operator, assign to num2, otherwise assign to num1
+    number2 = display;
+    return number2;
+  } else {
+    number1 = display;
+    return number1;
+  }
+}
+
+function displayInput(display) {
+  if (numberDisplay.innerText === "0") {
+    numberDisplay.innerText = display;
+  } else if (display === "clear") {
+    numberDisplay.innerText = "0";
+  } else {
+    numberDisplay.innerText += assignVar(display);
+  }
+}
+
 let numberDisplay = document.getElementById("number-display");
 const buttons = document.getElementsByClassName("buttons");
 
 function getNumber() {
-  let num1 = "";
-  let num2 = "";
-  let operator = "";
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function () {
       switch (this.id) {
         case "seven":
-          num1 = "7";
+          display = "7";
+          displayInput(display);
           break;
         case "eight":
           display = "8";
+          displayInput(display);
           break;
         case "nine":
           display = "9";
+          displayInput(display);
           break;
         case "four":
           display = "4";
+          displayInput(display);
           break;
         case "five":
           display = "5";
+          displayInput(display);
           break;
         case "six":
           display = "6";
+          displayInput(display);
           break;
         case "one":
           display = "1";
+          displayInput(display);
           break;
         case "two":
           display = "2";
+          displayInput(display);
           break;
         case "three":
           display = "3";
+          displayInput(display);
           break;
         case "zero":
           display = "0";
+          displayInput(display);
           break;
         case "clear":
           display = "clear";
+          displayInput(display);
           break;
         case "add":
-          display = "operator";
-          operator = "+";
+          operator = "add";
           break;
         case "subtract":
-          display = "operator";
-          operator = "-";
+          operator = "subtract";
           break;
         case "multiply":
-          display = "operator";
-          operator = "x";
+          operator = "multiply";
           break;
         case "divide":
-          display = "operator";
-          operator = "/";
+          operator = "divide";
           break;
         case "equals":
           display = "equals";
           break;
       }
-
-      if (numberDisplay.innerText === "0") {
-        numberDisplay.innerText = display;
-      } else if (display === "clear") {
-        numberDisplay.innerText = "0";
-      } else if (display === "equals") {
-        operate(operator, num1, num2);
-        numberDisplay.innerText += ` ${operator}`;
-      } else if (display === "operator") {
-        numberDisplay.innerText += ` ${operator}`;
-      } else if (num2.length === 0) {
-        num1 = display;
-        numberDisplay.innerText += ` ${display}`;
-      } else {
-        num2 = display;
-        numberDisplay.innerText += ` ${display}`;
-      }
-      console.log(num1)
-      console.log(num2)
-      console.log(operator)
     });
   }
 }
