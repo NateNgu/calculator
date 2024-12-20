@@ -69,10 +69,8 @@ function displayInput(display) {
     numberDisplay.innerText = operate(operation, number1, number2);
     if (typeof numberDisplay.innerText === "number") {
       numberDisplay.innerText.toFixed(3);
-      number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
-    } else {
-      number1 = ""
     }
+    number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
     number2 = "";
     operation = "";
     operator == "";
