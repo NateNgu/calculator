@@ -1,3 +1,11 @@
+let numberDisplay = document.getElementById("number-display");
+const buttons = document.getElementsByClassName("buttons");
+
+let number1 = "";
+let number2 = "";
+let operator = ""; // variable used for displaying the operator in the display
+let operation = ""; // variable used for running the operate function
+
 function add(num1, num2) {
   const total = num1 + num2;
   return total;
@@ -12,10 +20,13 @@ function multiply(num1, num2) {
   const total = num1 * num2;
   return total;
 }
-
 function divide(num1, num2) {
-  const total = num1 / num2;
-  return total;
+  let total = num1 / num2;
+  if (total === Infinity || total === NaN) {
+    return "Divide by zero";
+  } else {
+    return total;
+  }
 }
 
 function operate(operator, num1, num2) {
@@ -31,10 +42,6 @@ function operate(operator, num1, num2) {
   }
 }
 
-let number1 = "";
-let number2 = "";
-let operator = ""; // variable used for displaying the operator in the display
-let operation = ""; // variable used for running the operate function
 
 function assignVar(display) {
   if (!operation.length > 0) {
@@ -50,9 +57,10 @@ function assignVar(display) {
 }
 
 function displayInput(display) {
-  if (numberDisplay.innerText === "0") {
+  if (number1.length == 0) {
     numberDisplay.innerText = assignVar(display);
-  } else if (display === "clear") { // resets all variables
+  } else if (display === "clear") {
+    // resets all variables
     number1 = "";
     number2 = "";
     operation = "";
@@ -62,6 +70,7 @@ function displayInput(display) {
     number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
     number2 = "";
     operation = "";
+    operator == "";
   } else if (operator.length > 0) {
     numberDisplay.innerHTML = operator;
     operator = "";
@@ -75,11 +84,10 @@ function displayInput(display) {
   }
 }
 
-let numberDisplay = document.getElementById("number-display");
-const buttons = document.getElementsByClassName("buttons");
 
 function getNumber() {
-  for (let i = 0; i < buttons.length; i++) { // loop through all the buttons
+  for (let i = 0; i < buttons.length; i++) {
+    // loop through all the buttons
     buttons[i].addEventListener("click", function () {
       switch (this.id) {
         case "seven":
