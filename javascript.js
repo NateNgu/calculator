@@ -23,7 +23,7 @@ function multiply(num1, num2) {
 function divide(num1, num2) {
   let total = num1 / num2;
   if (total === Infinity || total === NaN) {
-    return "Divide by zero";
+    return 0;
   } else {
     return total;
   }
@@ -41,7 +41,6 @@ function operate(operator, num1, num2) {
       return divide(num1, num2);
   }
 }
-
 
 function assignVar(display) {
   if (!operation.length > 0) {
@@ -66,16 +65,15 @@ function displayInput(display) {
     operation = "";
     numberDisplay.innerText = "0";
   } else if (display === "equals" && typeof number2 === "number") {
-    numberDisplay.innerText = operate(operation, number1, number2);
-    if (typeof numberDisplay.innerText === "number") {
-      numberDisplay.innerText.toFixed(3);
-    }
+    numberDisplay.innerText = operate(operation, number1, number2)?.toFixed(3);
+    console.log(numberDisplay.innerText);
     number1 = numberDisplay.innerText; // sets num1 to the result from prev calculation
     number2 = "";
     operation = "";
     operator == "";
   } else if (operator.length > 0) {
     numberDisplay.innerHTML = operator;
+    console.log(numberDisplay.innerText);
     operator = "";
   } else if (display === "equals" && operation === "") {
     // if the user clicks enter without an operation or second number
@@ -86,7 +84,6 @@ function displayInput(display) {
     numberDisplay.innerText = assignVar(display); // displays number on calculator
   }
 }
-
 
 function getNumber() {
   for (let i = 0; i < buttons.length; i++) {
